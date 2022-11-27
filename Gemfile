@@ -70,3 +70,12 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+#REST client to fetch api
+gem 'rest-client', '~> 2.1'
+
+#Kaminari for pagination
+gem 'kaminari'
+
+#Faker
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
