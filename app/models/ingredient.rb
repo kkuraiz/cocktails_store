@@ -1,5 +1,5 @@
 class Ingredient < ApplicationRecord
-    has_many :cocktails
+    has_and_belongs_to_many :cocktails
 
     validates :ingredient_name, presence: true
 end

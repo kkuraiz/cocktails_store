@@ -1,8 +1,8 @@
 class Cocktail < ApplicationRecord
   belongs_to :category
-  has_many :ingredient
+  has_and_belongs_to_many :ingredients
 
   # validates :cocktail_name, :ingredient, :price, :category, presence: true
   # validates :price, numericality: true
-  serialize :ingredient
+  # serialize :ingredients
 end
