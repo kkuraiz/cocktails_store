@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
     has_many :cocktails
 
-    validates :category_name, :cocktail, presence: true
+    validates :category_name, presence: true
 end

@@ -24,15 +24,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_030234) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_name"
-    t.integer "cocktail_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cocktail_id"], name: "index_categories_on_cocktail_id"
   end
 
   create_table "cocktails", force: :cascade do |t|
     t.string "cocktail_name"
-    t.integer "ingredient_id", null: false
+    t.text "ingredients"
     t.decimal "price"
     t.text "instruction"
     t.integer "category_id", null: false
@@ -40,15 +38,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_030234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_cocktails_on_category_id"
-    t.index ["ingredient_id"], name: "index_cocktails_on_ingredient_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "ingredient_name"
-    t.integer "cocktail_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cocktail_id"], name: "index_ingredients_on_cocktail_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -73,10 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_27_030234) do
 
   add_foreign_key "carts", "cocktails"
   add_foreign_key "carts", "users"
-  add_foreign_key "categories", "cocktails"
   add_foreign_key "cocktails", "categories"
-  add_foreign_key "cocktails", "ingredients"
-  add_foreign_key "ingredients", "cocktails"
   add_foreign_key "orders", "cocktails"
   add_foreign_key "orders", "users"
 end
