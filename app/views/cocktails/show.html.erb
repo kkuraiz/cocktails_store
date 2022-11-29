@@ -1,2 +1,11 @@
 <h1>Cocktails#show</h1>
-<h1><%= @cocktail.cocktail_name %>, <%= @cocktail.ingredients.ingredient_name %></h1>
+<h1><%= @cocktail.cocktail_name %></h1>
+<ul>
+    <% @ingredients.each do |i| %>
+        <%@cocktail.ingredients.each do |c|%>
+            <%if i.id === c%>
+                <li><%=i.ingredient_name%></li>
+            <% end %>
+        <% end %>
+    <% end %>
+</ul>
