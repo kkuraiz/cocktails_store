@@ -1,5 +1,8 @@
-<h1>Cocktails#show</h1>
 <h1><%= @cocktail.cocktail_name %></h1>
+
+<h2>Category: <%= @cocktail.category.category_name %></h2>
+
+<h2>All ingredients:</h2>
 <ul>
     <% @ingredients.each do |i| %>
         <%@cocktail.ingredients.each do |c|%>
@@ -9,3 +12,9 @@
         <% end %>
     <% end %>
 </ul>
+
+<h2>Instruction:</h2>
+<p><%= @cocktail.instruction %></p>
+
+<h2>Image:</h2>
+<img src=<%= @cocktail.image %> alt="cocktail" height=200>

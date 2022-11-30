@@ -1,6 +1,6 @@
 class CocktailsController < ApplicationController
   def index
-    @cocktails = Cocktail.includes(:category).order(cocktail_name: :asc)
+    @cocktails = Cocktail.includes(:category).order(cocktail_name: :asc).page(params[:page])
   end
 
   def show

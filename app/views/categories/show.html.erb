@@ -1,0 +1,10 @@
+<h1><%= @category.category_name %></h1>
+
+<ul>
+    <% @cocktails.each do |c| %>
+        <% if c.category.category_name == @category.category_name %>
+            <li><%= link_to c.cocktail_name, cocktail_path(c) %></li>
+        <% end %>
+    <% end %>
+</ul>
+

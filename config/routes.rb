@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   get 'cocktails', to: "cocktails#index", as: "cocktails"
   get 'cocktails/:id', to: "cocktails#show", as: "cocktail", constraints: {id: /\d+/}
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get 'categories', to: "categories#index", as: "categories"
+  get 'categories/:id', to: "categories#show", as: "category", constraints: {id: /\d+/}
 end
