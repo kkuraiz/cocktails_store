@@ -11,6 +11,18 @@
   </head>
 
   <body>
+    <%= render "layouts/navbar" %>
+    <%= form_with(url: search_cocktails_path, method: :get, local: true) do %>
+      <div class="field is-ground mb-5" style="text-align:left">
+        <div class="control is-expanded" style="display:inline">
+          <%= text_field_tag(:keywords, nil, class: "input", placeholder: 'Search For Cocktails') %>
+          <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.category_name, el.id]}), :prompt => "All Categories" %>
+        </div>
+        <div class="control" style="display:inline">
+          <%=submit_tag("Search", class: "button is-primary")%>
+        </div>
+      </div>
+    <% end %> 
     <%= yield %>
   </body>
 </html>

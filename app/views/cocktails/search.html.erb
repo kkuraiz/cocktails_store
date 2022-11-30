@@ -1,0 +1,16 @@
+<h1>All result for "<%= params[:keywords] %>"</h1>
+
+<% if @cocktails.count == 0%>
+    <p>No result for <%= params[:keywords] %><p>
+<% end %>
+
+<ul>
+    <% @cocktails.each do |c| %>
+        <li><%= link_to c.cocktail_name, c %></li>
+    <% end %>
+    <% if params["category"] == ""%>
+        <% @ingredients.each do |i| %>
+            <li><%= i.ingredient_name %></li>
+        <% end %>
+    <% end %>
+</ul>
