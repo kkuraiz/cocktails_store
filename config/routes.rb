@@ -10,4 +10,8 @@ Rails.application.routes.draw do
       get "search"
     end
   end
+
+  devise_for :admin_users, ActiveAdmin: :Devise
+  ActiveAdmin.routes(self)
+  resources :cocktails
 end
