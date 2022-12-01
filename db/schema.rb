@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_052458) do
   create_table "cocktails", force: :cascade do |t|
     t.string "cocktail_name"
     t.text "ingredients"
-    t.decimal "price"
+    t.integer "price"
     t.text "instruction"
     t.integer "category_id", null: false
     t.string "image"

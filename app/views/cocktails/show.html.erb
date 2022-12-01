@@ -18,3 +18,5 @@
 
 <h2>Image:</h2>
 <img src=<%= @cocktail.image %> alt="cocktail" height=200>
+
+<h2>Price: <%=number_to_currency @cocktail.price /100.0 %></h2>
