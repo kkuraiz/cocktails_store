@@ -1,0 +1,19 @@
+<details>
+    <summary>Cart</summary>
+    <ul>
+        <% if @cart.empty? %>
+            <p>No items in cart</p>
+        <%else%>
+            <%count = 0 %>
+            <% @cart.each do |item| %>
+                <li><%= item.cocktail_name%>, quantity:
+                <%= form_tag edit_quantity_path(item) do %> 
+                    <%= number_field_tag(:quantity, nil, class: "input", value: session[:quantity][count])%>
+                <% end %> 
+                <p><%= button_to 'Remove from cart', remove_from_cart_path(item), method: :delete%></p>
+                </li>
+                <%count += 1%>
+            <% end %>
+        <%end%>
+    </ul>
+</details>

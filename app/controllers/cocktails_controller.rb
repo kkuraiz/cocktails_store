@@ -1,4 +1,7 @@
 class CocktailsController < ApplicationController
+  before_action :initialize_session
+  before_action :load_cart
+
   def index
     @cocktails = Cocktail.includes(:category).order(cocktail_name: :asc).page(params[:page])
   end
@@ -19,5 +22,13 @@ class CocktailsController < ApplicationController
       @cocktails = Cocktail.where("cocktail_name LIKE ? ", keyword_search).order(cocktail_name: :asc)
       @ingredients = Ingredient.where("ingredient_name LIKE ? ", keyword_search).order(ingredient_name: :asc)
     end
+  end
+
+  def add_to_cart
+    id = params[:id].to_i
+
+    session[:cart] << id unless session[:cart].include?(id)
+    session[:quantity].append(1)
+    redirect_to root_path
   end
 end

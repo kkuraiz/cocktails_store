@@ -85,3 +85,6 @@ gem 'sassc-rails'
 gem "activeadmin"
 
 gem "devise"
+
+gem "stripe", "~> 8.0"
+gem "pay", "~> 6.1"

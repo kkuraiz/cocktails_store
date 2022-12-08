@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_30_052458) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_042831) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -54,9 +54,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_052458) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cocktail_ingredients", force: :cascade do |t|
+    t.integer "cocktail_id", null: false
+    t.integer "ingredient_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cocktail_id"], name: "index_cocktail_ingredients_on_cocktail_id"
+    t.index ["ingredient_id"], name: "index_cocktail_ingredients_on_ingredient_id"
+  end
+
   create_table "cocktails", force: :cascade do |t|
     t.string "cocktail_name"
-    t.text "ingredients"
     t.integer "price"
     t.text "instruction"
     t.integer "category_id", null: false
@@ -94,6 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_052458) do
 
   add_foreign_key "carts", "cocktails"
   add_foreign_key "carts", "users"
+  add_foreign_key "cocktail_ingredients", "cocktails"
+  add_foreign_key "cocktail_ingredients", "ingredients"
   add_foreign_key "cocktails", "categories"
   add_foreign_key "orders", "cocktails"
   add_foreign_key "orders", "users"

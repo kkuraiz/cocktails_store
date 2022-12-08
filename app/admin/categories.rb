@@ -1,18 +1,24 @@
-ActiveAdmin.register Cocktail do
+ActiveAdmin.register Category do
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :cocktail_name, :price, :instruction, :category_id, :image
+  permit_params :category_name
+  # filter :created_at
   #
   # or
   #
   # permit_params do
-  #   permitted = [:cocktail_name, :price, :instruction, :category_id, :image]
+  #   permitted = [:category_name]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
+  # form do |f|
+  #   f.inputs "Cocktails" do
+  #     f.input :Category, as: :select, collection: Category.all.map{|c| [c.category_name, c.id]}
+  #   end
+  # end
 end
