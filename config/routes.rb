@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin: :Devise
   ActiveAdmin.routes(self)
   resources :cocktails
+
+  get 'checkout', to: 'checkouts#show'
+  get 'checkout/success', to: 'checkout#success'
+  get 'billing', to: 'billing#show'
 end
