@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   post 'cocktails/add_to_cart/:id', to: 'cocktails#add_to_cart', as: "add_to_cart"
   delete 'cocktails/remove_from_cart/:id', to: 'cocktails#remove_from_cart', as: "remove_from_cart"
 
+  get "checkout", to: "checkouts#show"
+  get "billing", to: "billing#show"
+
   resources :cocktails, only: [:index, :show] do
     collection do
       get "search"

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    include Pay::Billable
+
     has_many :orders
     has_one :cart
 
