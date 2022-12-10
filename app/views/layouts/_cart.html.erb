@@ -14,7 +14,7 @@
                 </li>
                 <%count += 1%>
             <% end %>
-            <p><%= button_to 'Checkout', checkout_path(), method: :get%></p>
+            <p><%= button_to 'Checkout', checkout_path, data: {turbo: false}, method: :get%></p>
         <%end%>
     </ul>
 </details>
