@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_10_234635) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_11_063731) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -23,6 +23,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_234635) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "province_id", null: false
+    t.string "street_name"
+    t.integer "street_number"
+    t.integer "unit_number"
+    t.string "city"
+    t.string "postal_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["province_id"], name: "index_addresses_on_province_id"
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -91,6 +105,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_234635) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.decimal "pst"
+    t.decimal "hst"
+    t.decimal "gst"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_addresses", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "address_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_user_addresses_on_address_id"
+    t.index ["user_id"], name: "index_user_addresses_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -103,6 +136,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_234635) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "provinces"
+  add_foreign_key "addresses", "users"
   add_foreign_key "carts", "cocktails"
   add_foreign_key "carts", "users"
   add_foreign_key "cocktail_ingredients", "cocktails"
@@ -110,4 +145,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_234635) do
   add_foreign_key "cocktails", "categories"
   add_foreign_key "orders", "cocktails"
   add_foreign_key "orders", "users"
+  add_foreign_key "user_addresses", "addresses"
+  add_foreign_key "user_addresses", "users"
 end
