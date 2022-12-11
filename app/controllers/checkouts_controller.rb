@@ -32,9 +32,9 @@ class CheckoutsController < ApplicationController
       mode: 'payment',
       success_url: domain + 'success',
       cancel_url: domain,
-      shipping_address_collection: {allowed_countries: ['US', 'CA']},
+      shipping_address_collection: {allowed_countries: ['CA']},
       automatic_tax: {enabled: true},
     })
     redirect_to session.url, allow_other_host: true
   end
-end  
+end
