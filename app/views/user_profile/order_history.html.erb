@@ -1,2 +1,15 @@
-<h1>UserProfile#order_history</h1>
-<p>Find me in app/views/user_profile/order_history.html.erb</p>
+<h1>Order History</h1>
+<table>
+    <tr>
+        <th>Order Number</th>
+        <th>Date</th>
+        <th>Total</th>
+    </tr>
+    <% @orders.each do |order| %>
+    <tr>
+        <td><%= link_to order.id, order_path(order) %></td>
+        <td><%= order.created_at %></td>
+        <td>$<%= order.total_price / 100 %></td>
+    </tr>  
+    <% end %>  
+</table>

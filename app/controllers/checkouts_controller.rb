@@ -61,7 +61,8 @@ class CheckoutsController < ApplicationController
       order = current_user.orders.create(
         payment: @payment_id,
         total_price: payment_intent.amount,
-        address: address,  
+        address: address, 
+        province: payment_intent.shipping.address.state
       )
 
       puts "order:" + order.to_s

@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get "success", to: "checkouts#success", as: "success"
   get "cancel", to: "checkouts#cancel", as: "cancel"
 
+  get 'orders_history', to: "user_profile#order_history"
+  get 'orders_history/:id', to: "user_profile#show", as: "order", constraints: {id: /\d+/}
+
   resources :cocktails, only: [:index, :show] do
     collection do
       get "search"

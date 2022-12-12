@@ -1,0 +1,9 @@
+<h1>Order number: <%= @order.id %></h1>
+
+<ol>
+    <% @order_items.each do |item| %>
+        <li><%= item.cocktail.cocktail_name %>, quantity: <%= item.quantity %></li>
+    <% end %>
+</ol>
+<p>Tax: $<%= number_with_precision(@order.total_price * @tax_rate / 100, precision: 2) %></p>
+<p>Total amount: $<%= @order.total_price / 100 %></p>
