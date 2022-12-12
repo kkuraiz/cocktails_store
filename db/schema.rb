@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_11_063731) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_022235) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -23,20 +23,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_063731) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
-  end
-
-  create_table "addresses", force: :cascade do |t|
-    t.integer "province_id", null: false
-    t.string "street_name"
-    t.integer "street_number"
-    t.integer "unit_number"
-    t.string "city"
-    t.string "postal_code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["province_id"], name: "index_addresses_on_province_id"
-    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -94,14 +80,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_063731) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "cocktail_id", null: false
+    t.integer "price"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cocktail_id"], name: "index_order_items_on_cocktail_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "cocktail_id"
     t.decimal "total_price"
     t.integer "item_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cocktail_id"], name: "index_orders_on_cocktail_id"
+    t.string "payment"
+    t.string "address"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -115,15 +112,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_063731) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_addresses", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "address_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_user_addresses_on_address_id"
-    t.index ["user_id"], name: "index_user_addresses_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -132,19 +120,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_063731) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "addresses", "provinces"
-  add_foreign_key "addresses", "users"
   add_foreign_key "carts", "cocktails"
   add_foreign_key "carts", "users"
   add_foreign_key "cocktail_ingredients", "cocktails"
   add_foreign_key "cocktail_ingredients", "ingredients"
   add_foreign_key "cocktails", "categories"
-  add_foreign_key "orders", "cocktails"
+  add_foreign_key "order_items", "cocktails"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
-  add_foreign_key "user_addresses", "addresses"
-  add_foreign_key "user_addresses", "users"
 end

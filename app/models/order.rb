@@ -1,8 +1,8 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :cocktail
+  has_many :order_items
 
-  validate :user, :total_price, :item_count, presence: true
+  validates :user, :total_price, presence: true
   validates :total_price, numericality: true
-  validate :items_count, numericality: { only_integer: true }
+  # validates :item_count, numericality: { only_integer: true }
 end
